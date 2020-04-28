@@ -1,0 +1,120 @@
+import java.util.Scanner;
+abstract class MyBank {
+	 
+	      // variable declaration
+	    float account_balance;
+	    String cust_name;
+
+	    // public VAR
+	    public int account_num;
+	    
+	    // private VAR
+	    private String cust_password;
+	    
+	     public MyBank() {
+	        account_num = 987345;
+	        account_balance = 5000;
+	        cust_name = "shubham patel";
+	        setCust_password("null");
+	    }
+
+	    // parameterized constructor
+	    public MyBank(int account_num, String cust_name, int account_balance, String cust_password) {
+	        this.account_num  = 987345;
+	        this.cust_name = "shubham patel";
+	        this.account_balance = 5000;
+	        this.setCust_password(cust_password);
+	    }
+	 // abstract method
+	    public abstract String showAccount();
+
+	    // withdraw method
+	    public void withdrawMoney(int amount) {
+	       
+	            if (account_balance >= 200) {
+	                account_balance -= 100;
+	           
+	            }
+	        System.out.println("insufficient balance");
+	        }
+
+		public String getCust_password() {
+			return cust_password;
+		}
+
+		public void setCust_password(String cust_password) {
+			this.cust_password = cust_password;
+		}
+		class SavingAccount extends MyBank {
+		    float intrest_rate;
+
+		    // default constructor
+		    public SavingAccount() {
+		        intrest_rate = 0.003f;
+		    }
+
+		    // parameterized constructor
+		    public SavingAccount(int account_num, String cust_name, int account_balance, String cust_password, float rate) {
+		        super(account_num, cust_name, account_balance, cust_password);
+		        if (rate > 0.015 || rate < 0.003) {
+		            intrest_rate = 0.003f;
+		        } else {
+		            intrest_rate = rate;
+		        }
+		    }
+
+		    public void applyIntrest() {
+		        if (account_balance >= 500) {
+		            account_balance += (account_balance * intrest_rate);
+		        }
+		    }
+
+		    // abstrct method from parent class
+		    public String showAccount() {
+		        String temp = "acc_num: " + account_num + ", name: " + cust_name + ", balance: " + account_balance;
+		        return temp;
+		    }
+		}
+
+		public class MyBank {
+			
+		    public static void main(String[] args) 
+		    {
+		        Scanner scan = new Scanner(System.in);
+		        int a, b;
+		        float c;
+		        String d, e;
+
+		        System.out.println("enter acc_num, name, balance, password, rate");
+		        a = scan.nextInt();
+		        d = scan.next();
+		        b = scan.nextInt();
+		        e = scan.next();
+		        c = scan.nextFloat();
+		        // read values, use Scanner class
+		        SavingAccount s1 = new SavingAccount(a, d, b, e, c);
+
+		        // details of account
+		        System.out.println(s1.showAccount());
+
+		        // withdraw 100 from account
+		        s1.withdrawMoney(100);
+
+		        // call applyintrest on account
+		        s1.applyIntrest();
+
+		        // display the balance
+		        System.out.println(s1.showAccount());
+
+		        // to show exception works
+		        s1.withdrawMoney(800);
+		        System.out.println(s1.showAccount());
+
+		        System.out.println("program terminated successfully");
+		            
+		    }   
+		}
+	}
+
+
+                
